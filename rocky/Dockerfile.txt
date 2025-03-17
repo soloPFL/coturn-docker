@@ -1,0 +1,22 @@
+FROM rockylinux:9
+
+# Install coturn and remove unnecessary files to keep image small
+RUN dnf -y install epel-release && \
+    dnf -y install coturn && \
+    dnf clean all
+
+# Copy the setup script
+COPY setup.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/setup.sh
+
+# Set environment variables with defaults
+ENV TURN_PASSWORD="defaultpassword" \
+    TURN_REALM="example.org" \
+    TURN_INTERNAL_IP="0.0.0.0" \
+    TURN_EXTERNAL_IP="0.0.0.0"
+
+# Expose the necessary ports
+EXPOSE 3478/tcp 3478/udp 49152-65535/udp
+
+# Run the setup script when the container starts
+CMD ["/usr/local/bin/setup.sh"]
