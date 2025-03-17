@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  coturn:
+    build: .
+    container_name: coturn-server
+    environment:
+      - TURN_PASSWORD=your_secret_password
+      - TURN_REALM=your_domain.com
+      - TURN_INTERNAL_IP=0.0.0.0
+      - TURN_EXTERNAL_IP=your_public_ip
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+      - "49152-65535:49152-65535/udp"
+    restart: unless-stopped
+    # Add resource constraints for a smaller footprint
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
