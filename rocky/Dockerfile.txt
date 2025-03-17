@@ -1,8 +1,8 @@
 FROM rockylinux:9
 
-# Install coturn and remove unnecessary files to keep image small
+# Install coturn and debugging tools
 RUN dnf -y install epel-release && \
-    dnf -y install coturn && \
+    dnf -y install coturn procps-ng findutils && \
     dnf clean all
 
 # Copy the setup script
