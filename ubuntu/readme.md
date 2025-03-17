@@ -12,8 +12,8 @@ This repository contains files to build and run a Coturn TURN server in a Docker
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/coturn-docker.git
-   cd coturn-docker
+   git clone https://github.com/soloPFL/coturn-docker.git
+   cd coturn-docker/ubuntu/
    ```
 
 2. Edit `docker-compose.yml` to set your environment variables:
